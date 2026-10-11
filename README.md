@@ -66,3 +66,11 @@ independent record sets.
 
 ## Not in this repo
 `../.secrets/github.token` — the push credential. Never commit it.
+
+The macOS Keychain also holds a GitHub login for this account, but it has **no write access**
+to this repo (push fails with 403). Push with the token instead, read from the file and never
+echoed:
+
+```
+git -c credential.helper= -c credential.helper='!f(){ echo username=x-access-token; printf "password=%s\n" "$(tr -d "[:space:]" < ../.secrets/github.token)"; }; f' push origin main
+```
