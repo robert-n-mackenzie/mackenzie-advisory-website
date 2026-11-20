@@ -84,5 +84,8 @@ to this repo (push fails with 403). Push with the token instead, read from the f
 echoed:
 
 ```
-git -c credential.helper= -c credential.helper='!f(){ echo username=x-access-token; printf "password=%s\n" "$(tr -d "[:space:]" < ../.secrets/github.token)"; }; f' push origin main
+git -c http.postBuffer=157286400 -c http.version=HTTP/1.1 -c credential.helper= -c credential.helper='!f(){ echo username=x-access-token; printf "password=%s\n" "$(tr -d "[:space:]" < ../.secrets/github.token)"; }; f' push origin main
 ```
+
+The two `http.*` settings matter for pushes with new photos: without them a push of a few MB
+fails with "the remote end hung up unexpectedly" and nothing arrives on GitHub.
