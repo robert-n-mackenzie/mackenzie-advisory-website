@@ -13,10 +13,22 @@ CSS custom properties on `:root`; `--accent` / `--block-accent` control the gree
 |---|---|
 | `m-robot.jpg`, `m-panel.jpg`, `m-stage.jpg`, `m-davos.jpg` | hero mosaic |
 | `headshot.jpg` | About |
-| `band-teaching.jpg` | full-width band |
+| `show-*.jpg` (+ `-1200` versions) | full-width band: slideshow of recent engagements and appearances |
+| `band-teaching.jpg` | not used since the slideshow (kept; was the single band photo) |
 | `logo-horizontal*.svg`, `monogram.svg` | header, footer, favicon |
 
-Originals: `../Media/photos/`. Logo masters: `../Media/`.
+Originals: `../Media/photos/` and `../Media/`. Logo masters: `../Media/`.
+
+### Slideshow
+One `<img>` per photo inside `.show-frame` in `index.html`; the first one carries `class="on"`.
+Each line sets its crop focus (`style="--pos:50% 40%"`, horizontal then vertical) and its
+caption (`data-cap`). Indicators and pause button are built by the script at the bottom of
+the page. Timing: 7 s per photo (`--dwell` on `.band figure`), 1.8 s crossfade.
+
+To add a photo: export a large version (2000–2400 px wide, or the original width if smaller)
+and a 1200 px version, JPEG quality ~75, **without metadata** — phone photos carry GPS
+coordinates. Then copy an existing `<img>` line and adjust `--pos` until the person is framed
+at both desktop and phone widths.
 
 ## Deploy
 Push to `main` on `github.com/robert-n-mackenzie/mackenzie-advisory-website`

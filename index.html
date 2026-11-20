@@ -115,12 +115,38 @@ section.pad{padding-block:clamp(48px,6.4vw,86px)}
   font-size:16px;min-width:0;overflow-wrap:anywhere}
 .eng-note{margin-top:18px;font-size:13.5px;color:var(--muted);max-width:60ch}
 
-/* ---- speaking band ---- */
-.band figure{margin:0}
-.band img{width:100%;height:clamp(230px,29vw,400px);object-fit:cover;
-  object-position:50% 34%}
+/* ---- speaking band: slow crossfade slideshow ---- */
+.band figure{margin:0;--dwell:7s}
+.show-frame{position:relative;overflow:hidden;height:clamp(260px,41vw,600px);
+  background:var(--rule)}
+.show-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:var(--pos,50% 40%);transform-origin:var(--pos,50% 40%);
+  opacity:0;transition:opacity 1.8s ease-in-out}
+.show-frame img.on{opacity:1;animation:drift calc(var(--dwell) + 1.8s) linear both}
+@keyframes drift{from{transform:scale(1)}to{transform:scale(1.035)}}
+.show-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding-top:10px}
 .band figcaption{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
-  color:var(--muted);padding-top:10px}
+  color:var(--muted);min-width:0;display:grid}
+.band figcaption span{grid-area:1/1;opacity:0;transition:opacity 1s ease}
+.band figcaption span.on{opacity:1}
+.show-ctl{display:flex;align-items:center;gap:2px;flex:0 0 auto}
+.show-ctl[hidden]{display:none}
+.show-ctl button{appearance:none;border:0;background:none;padding:0;margin:0;
+  color:var(--muted);cursor:pointer;border-radius:2px}
+.show-ctl button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.show-dot{position:relative;width:26px;height:20px}
+.show-dot::before,.show-dot i{content:"";position:absolute;left:3px;right:3px;top:9px;
+  height:2px;background:var(--muted);opacity:.35}
+.show-dot i{background:var(--accent);opacity:1;transform:scaleX(0);transform-origin:left}
+.show-dot.on i{animation:fill var(--dwell) linear forwards}
+@keyframes fill{to{transform:scaleX(1)}}
+.show-pp{width:22px;height:20px;display:grid;place-items:center;margin-left:6px}
+.show-pp:hover{color:var(--ink)}
+.show-pp svg{width:10px;height:10px;fill:currentColor}
+.show-pp .i-play,.show.held .show-pp .i-pause{display:none}
+.show.held .show-pp .i-play{display:block}
+.show.paused .show-frame img.on,.show.paused .show-dot.on i{animation-play-state:paused}
 
 /* ---- contact ---- */
 .contact{display:grid;grid-template-columns:minmax(0,1fr) auto;
@@ -223,9 +249,20 @@ footer{background:var(--block-bg);color:var(--block-fg)}
   </div>
 
   <div class="band">
-    <figure>
-      <img src="img/band-teaching.jpg" alt="Robert MacKenzie teaching an executive programme">
-      <div class="wrap"><figcaption>Executive teaching &mdash; CEIBS, 2026</figcaption></div>
+    <figure class="show" aria-roledescription="carousel" aria-label="Recent engagements and appearances">
+      <div class="show-frame">
+        <img class="on" src="img/show-summit-2026-1200.jpg" srcset="img/show-summit-2026-1200.jpg 1200w, img/show-summit-2026.jpg 2000w" sizes="100vw" loading="lazy" decoding="async" style="--pos:50% 64%" data-cap="Panel moderation &mdash; Machine Intelligence Summit, 2026" alt="Robert MacKenzie on stage with the panel, giving a thumbs-up">
+        <img src="img/show-lab-2026-1200.jpg" srcset="img/show-lab-2026-1200.jpg 1200w, img/show-lab-2026.jpg 2000w" sizes="100vw" loading="lazy" decoding="async" style="--pos:40% 52%" data-cap="Advisory board &mdash; Nio Robotics, France, 2026" alt="Robert MacKenzie at a test rig in the Nio Robotics lab, with an ARU robot in the foreground">
+        <img src="img/show-ceibs-2026-1200.jpg" srcset="img/show-ceibs-2026-1200.jpg 1200w, img/show-ceibs-2026.jpg 1600w" sizes="100vw" loading="lazy" decoding="async" style="--pos:50% 54%" data-cap="Executive teaching &mdash; CEIBS, 2026" alt="Robert MacKenzie teaching an executive programme at CEIBS">
+        <img src="img/show-keynote-2026-1200.jpg" srcset="img/show-keynote-2026-1200.jpg 1200w, img/show-keynote-2026.jpg 2400w" sizes="100vw" loading="lazy" decoding="async" style="--pos:50% 40%" data-cap="Keynote &mdash; Robotics on the Rise, 2026" alt="Robert MacKenzie giving a keynote to a full room">
+        <img src="img/show-reinvent-2023-1200.jpg" srcset="img/show-reinvent-2023-1200.jpg 1200w, img/show-reinvent-2023.jpg 1536w" sizes="100vw" loading="lazy" decoding="async" style="--pos:50% 45%" data-cap="Speaking &mdash; AWS re:Invent, 2023" alt="Robert MacKenzie speaking on stage">
+      </div>
+      <div class="wrap show-bar">
+        <figcaption>Panel moderation &mdash; Machine Intelligence Summit, 2026</figcaption>
+        <div class="show-ctl" hidden>
+          <button class="show-pp" type="button" aria-label="Pause slideshow"><svg class="i-pause" viewBox="0 0 10 10" aria-hidden="true"><rect x="1" y="0" width="3" height="10"/><rect x="6" y="0" width="3" height="10"/></svg><svg class="i-play" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z"/></svg></button>
+        </div>
+      </div>
     </figure>
   </div>
 
@@ -234,11 +271,11 @@ footer{background:var(--block-bg);color:var(--block-fg)}
       <p class="label"><span class="mark"></span>Current engagements</p>
       <ul class="eng">
         <li><span class="mark"></span>Robotics deal flow and investment thesis work for an investment firm in Liechtenstein</li>
-        <li><span class="mark"></span>Advisory board of a robotics company in France</li>
+        <li><span class="mark"></span>Advisory board of Nio Robotics, France</li>
         <li><span class="mark"></span>Advisory to an agentic-AI startup in Zürich</li>
         <li><span class="mark"></span>Advisory to an independent games studio</li>
       </ul>
-      <p class="eng-note">Clients are described without names as a matter of course. References are available on request.</p>
+      <p class="eng-note">Other clients are described without names as a matter of course. References are available on request.</p>
     </section>
 
     <hr class="rule">
@@ -262,6 +299,73 @@ footer{background:var(--block-bg);color:var(--block-fg)}
     <p class="foot-meta">MacKenzie Executive Advisory<br>Einzelunternehmen &middot; Zürich, Switzerland</p>
   </div>
 </footer>
+
+<script>
+/* Slideshow: the active indicator's fill animation is the clock (CSS --dwell). It advances
+   on animationend, so pausing is just animation-play-state. Pauses on hover, off-screen and
+   in a hidden tab; never autoplays under prefers-reduced-motion. Without JS, slide 1 shows. */
+(function(){
+  var show=document.querySelector('.show');
+  if(!show) return;
+  var frame=show.querySelector('.show-frame'), slides=[].slice.call(frame.querySelectorAll('img'));
+  var cap=show.querySelector('figcaption'), ctl=show.querySelector('.show-ctl'), pp=show.querySelector('.show-pp');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cur=0, dots=[], caps=[], why={held:false,hover:false,away:true,hidden:document.hidden};
+  if(slides.length<2) return;
+
+  // All captions share one grid cell, so the bar keeps the height of the longest one
+  // and the page below never jumps when a caption wraps differently.
+  cap.textContent='';
+  slides.forEach(function(s,k){
+    var c=document.createElement('span');
+    c.textContent=s.getAttribute('data-cap');
+    if(k) c.setAttribute('aria-hidden','true'); else c.className='on';
+    cap.appendChild(c); caps.push(c);
+  });
+
+  function sync(){
+    show.classList.toggle('held',why.held);
+    show.classList.toggle('paused',why.held||why.hover||why.away||why.hidden);
+    pp.setAttribute('aria-label',why.held?'Play slideshow':'Pause slideshow');
+  }
+  function go(n){
+    if(n===cur) return;
+    var out=slides[cur];
+    out.style.transform=getComputedStyle(out).transform; // hold the zoom while it fades out
+    setTimeout(function(){out.style.transform='';},1900);
+    out.classList.remove('on'); dots[cur].classList.remove('on'); dots[cur].removeAttribute('aria-current');
+    caps[cur].classList.remove('on'); caps[cur].setAttribute('aria-hidden','true');
+    cur=n;
+    slides[cur].classList.add('on'); dots[cur].classList.add('on'); dots[cur].setAttribute('aria-current','true');
+    caps[cur].classList.add('on'); caps[cur].removeAttribute('aria-hidden');
+  }
+
+  slides.forEach(function(s,k){
+    var b=document.createElement('button');
+    b.type='button'; b.className='show-dot'+(k?'':' on');
+    b.setAttribute('aria-label','Show photo '+(k+1)+' of '+slides.length);
+    b.appendChild(document.createElement('i'));
+    b.addEventListener('click',function(){go(k);});
+    ctl.insertBefore(b,pp); dots.push(b);
+  });
+  dots[0].setAttribute('aria-current','true');
+
+  ctl.addEventListener('animationend',function(e){
+    if(e.target.parentNode===dots[cur]) go((cur+1)%slides.length);
+  });
+  pp.addEventListener('click',function(){why.held=!why.held; sync();});
+  frame.addEventListener('mouseenter',function(){why.hover=true; sync();});
+  frame.addEventListener('mouseleave',function(){why.hover=false; sync();});
+  document.addEventListener('visibilitychange',function(){why.hidden=document.hidden; sync();});
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(es){why.away=!es[0].isIntersecting; sync();},{threshold:.25}).observe(frame);
+  } else why.away=false;
+
+  if(reduce) pp.hidden=true;
+  ctl.hidden=false;
+  sync();
+})();
+</script>
 
 </body>
 </html>
