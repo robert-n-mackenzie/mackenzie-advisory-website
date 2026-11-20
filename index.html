@@ -113,11 +113,15 @@ section.pad{padding-block:clamp(48px,6.4vw,86px)}
   border-top:1px solid var(--rule)}
 .eng li{padding-block:15px;border-bottom:1px solid var(--hair);
   font-size:16px;min-width:0;overflow-wrap:anywhere}
+.eng a{text-decoration:none;border-bottom:1px solid var(--accent);
+  transition:color .16s ease}
+.eng a:hover{color:var(--accent)}
+.eng a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
 .eng-note{margin-top:18px;font-size:13.5px;color:var(--muted);max-width:60ch}
 
 /* ---- speaking band: slow crossfade slideshow ---- */
 .band figure{margin:0;--dwell:7s}
-.show-frame{position:relative;overflow:hidden;height:clamp(260px,41vw,600px);
+.show-frame{position:relative;overflow:hidden;height:clamp(220px,41vw,600px);
   background:var(--rule)}
 .show-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   object-position:var(--pos,50% 40%);transform-origin:var(--pos,50% 40%);
@@ -179,6 +183,8 @@ footer{background:var(--block-bg);color:var(--block-fg)}
   .about img{max-width:280px}
   .svc-row{grid-template-columns:1fr;gap:8px}
   .contact{grid-template-columns:1fr;align-items:start}
+  .show-bar{flex-direction:column;align-items:stretch;gap:4px}
+  .show-ctl{margin-left:-3px}
   .foot-in{justify-content:flex-start}
   .foot-meta{text-align:left}
 }
@@ -251,14 +257,17 @@ footer{background:var(--block-bg);color:var(--block-fg)}
   <div class="band">
     <figure class="show" aria-roledescription="carousel" aria-label="Recent engagements and appearances">
       <div class="show-frame">
-        <img class="on" src="img/show-summit-2026-1200.jpg" srcset="img/show-summit-2026-1200.jpg 1200w, img/show-summit-2026.jpg 2000w" sizes="100vw" loading="lazy" decoding="async" style="--pos:50% 64%" data-cap="Panel moderation &mdash; Machine Intelligence Summit, 2026" alt="Robert MacKenzie on stage with the panel, giving a thumbs-up">
+        <img class="on" src="img/show-davos-2026-1200.jpg" srcset="img/show-davos-2026-1200.jpg 1200w, img/show-davos-2026.jpg 2000w" sizes="100vw" loading="lazy" decoding="async" style="--pos:45% 15%" data-cap="Moderating a robotics CEO roundtable &mdash; AI House Davos, during WEF 2026" alt="Robert MacKenzie with the CEOs of his physical AI and robotics panel at AI House Davos">
+        <img src="img/show-summit-2026-1200.jpg" srcset="img/show-summit-2026-1200.jpg 1200w, img/show-summit-2026.jpg 2000w" sizes="100vw" loading="lazy" decoding="async" style="--pos:50% 64%" data-cap="Panel moderation &mdash; Machine Intelligence Summit, 2026" alt="Robert MacKenzie on stage with the panel, giving a thumbs-up">
         <img src="img/show-lab-2026-1200.jpg" srcset="img/show-lab-2026-1200.jpg 1200w, img/show-lab-2026.jpg 2000w" sizes="100vw" loading="lazy" decoding="async" style="--pos:40% 52%" data-cap="Advisory board &mdash; Nio Robotics, France, 2026" alt="Robert MacKenzie at a test rig in the Nio Robotics lab, with an ARU robot in the foreground">
-        <img src="img/show-ceibs-2026-1200.jpg" srcset="img/show-ceibs-2026-1200.jpg 1200w, img/show-ceibs-2026.jpg 1600w" sizes="100vw" loading="lazy" decoding="async" style="--pos:50% 54%" data-cap="Executive teaching &mdash; CEIBS, 2026" alt="Robert MacKenzie teaching an executive programme at CEIBS">
+        <img src="img/show-ceibs-2026-1200.jpg" srcset="img/show-ceibs-2026-1200.jpg 1200w, img/show-ceibs-2026.jpg 1600w" sizes="100vw" loading="lazy" decoding="async" style="--pos:50% 54%" data-cap="Executive teaching &mdash; CEIBS DBA, 2026" alt="Robert MacKenzie teaching an executive programme at CEIBS">
         <img src="img/show-keynote-2026-1200.jpg" srcset="img/show-keynote-2026-1200.jpg 1200w, img/show-keynote-2026.jpg 2400w" sizes="100vw" loading="lazy" decoding="async" style="--pos:50% 40%" data-cap="Keynote &mdash; Robotics on the Rise, 2026" alt="Robert MacKenzie giving a keynote to a full room">
+        <img src="img/show-pingpong-2026-1200.jpg" srcset="img/show-pingpong-2026-1200.jpg 1200w, img/show-pingpong-2026.jpg 2000w" sizes="100vw" loading="lazy" decoding="async" style="--pos:81% 60%" data-cap="Playing table tennis against a robot, 2026" alt="Robert MacKenzie playing table tennis against a robot arm, the robot leading 1:0">
+        <img src="img/show-stuttgart-2026-1200.jpg" srcset="img/show-stuttgart-2026-1200.jpg 1200w, img/show-stuttgart-2026.jpg 2000w" sizes="100vw" loading="lazy" decoding="async" style="--pos:60% 40%" data-cap="Executive teaching &mdash; CEIBS Global EMBA, Stuttgart, 2026" alt="Robert MacKenzie presenting to a CEIBS Global Executive MBA class">
         <img src="img/show-reinvent-2023-1200.jpg" srcset="img/show-reinvent-2023-1200.jpg 1200w, img/show-reinvent-2023.jpg 1536w" sizes="100vw" loading="lazy" decoding="async" style="--pos:50% 45%" data-cap="Speaking &mdash; AWS re:Invent, 2023" alt="Robert MacKenzie speaking on stage">
       </div>
       <div class="wrap show-bar">
-        <figcaption>Panel moderation &mdash; Machine Intelligence Summit, 2026</figcaption>
+        <figcaption>Moderating a robotics CEO roundtable &mdash; AI House Davos, during WEF 2026</figcaption>
         <div class="show-ctl" hidden>
           <button class="show-pp" type="button" aria-label="Pause slideshow"><svg class="i-pause" viewBox="0 0 10 10" aria-hidden="true"><rect x="1" y="0" width="3" height="10"/><rect x="6" y="0" width="3" height="10"/></svg><svg class="i-play" viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0l9 5-9 5z"/></svg></button>
         </div>
@@ -271,9 +280,9 @@ footer{background:var(--block-bg);color:var(--block-fg)}
       <p class="label"><span class="mark"></span>Current engagements</p>
       <ul class="eng">
         <li><span class="mark"></span>Robotics deal flow and investment thesis work for an investment firm in Liechtenstein</li>
-        <li><span class="mark"></span>Advisory board of Nio Robotics, France</li>
-        <li><span class="mark"></span>Advisory to an agentic-AI startup in Zürich</li>
-        <li><span class="mark"></span>Advisory to an independent games studio</li>
+        <li><span class="mark"></span>Advisory board of <a href="https://nio-robotics.com/" target="_blank" rel="noopener">Nio Robotics</a>, France</li>
+        <li><span class="mark"></span>Advisory to <a href="https://hellolupa.com/" target="_blank" rel="noopener">Lupa</a>, an agentic-AI startup in Zürich</li>
+        <li><span class="mark"></span>Advisory to <a href="https://www.macncheesegames.com/" target="_blank" rel="noopener">Mac n Cheese Games</a>, an independent games studio</li>
       </ul>
       <p class="eng-note">Other clients are described without names as a matter of course. References are available on request.</p>
     </section>

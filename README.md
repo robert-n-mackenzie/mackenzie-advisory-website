@@ -17,13 +17,24 @@ CSS custom properties on `:root`; `--accent` / `--block-accent` control the gree
 | `band-teaching.jpg` | not used since the slideshow (kept; was the single band photo) |
 | `logo-horizontal*.svg`, `monogram.svg` | header, footer, favicon |
 
-Originals: `../Media/photos/` and `../Media/`. Logo masters: `../Media/`.
+Originals: `../Media/photos/events/` and `../Media/photos/portraits/`. Logo masters: `../Media/`.
 
 ### Slideshow
 One `<img>` per photo inside `.show-frame` in `index.html`; the first one carries `class="on"`.
 Each line sets its crop focus (`style="--pos:50% 40%"`, horizontal then vertical) and its
 caption (`data-cap`). Indicators and pause button are built by the script at the bottom of
 the page. Timing: 7 s per photo (`--dwell` on `.band figure`), 1.8 s crossfade.
+
+| Slide image | Original in `../Media/photos/events/` |
+|---|---|
+| `show-davos-2026` | `2026.01 World Economic Forum - Robotics, Physical AI Roundtable AI House.png` (badges already removed) |
+| `show-summit-2026` | `2026.11 Machine Intelligence Summit - Moderator 02.jpg` |
+| `show-lab-2026` | `2026.11 Nio Robotics - Advisor 02.jpg` |
+| `show-ceibs-2026` | `2026.06 CEIBS - Robotics & Executive Thinking.JPG` |
+| `show-keynote-2026` | `2026.03 Robotics on the Rise - Keynote (Bild-4).jpg` |
+| `show-pingpong-2026` | `2026.06 - Playing against a ping pong robot.png` |
+| `show-stuttgart-2026` | `2026.02 CEIBS Stuttgart - Global Executive MBA 01.jpeg` |
+| `show-reinvent-2023` | `2023.11 AWS reInvent - Speaking 01 (IMG-20231128-WA0014).jpg` |
 
 To add a photo: export a large version (2000–2400 px wide, or the original width if smaller)
 and a 1200 px version, JPEG quality ~75, **without metadata** — phone photos carry GPS
