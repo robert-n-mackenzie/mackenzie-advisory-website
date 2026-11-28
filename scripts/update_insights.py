@@ -75,21 +75,21 @@ def render(posts, engagement):
              "",
              '    <section class="pad" id="insights">',
              '      <p class="label"><span class="mark"></span>Insights</p>',
+             '      <p class="insights-links">'
+             f'<a href="{PUBLICATION}/archive" target="_blank" rel="noopener">All articles on Substack</a>'
+             f'<a href="{PUBLICATION}/subscribe" target="_blank" rel="noopener">Subscribe</a></p>',
              '      <ul class="eng insights">',
              *[row(p, engagement) for p in posts[:SHOW]],
              "      </ul>"]
     if len(posts) > SHOW:
         lines += ['      <details class="more">',
-                  f'        <summary><span class="when-closed">Show all {len(posts)} articles</span>'
+                  '        <summary><span class="when-closed">Show all articles</span>'
                   '<span class="when-open">Show fewer</span></summary>',
                   '        <ul class="eng insights">',
                   *[row(p, engagement) for p in posts[SHOW:]],
                   "        </ul>",
                   "      </details>"]
-    lines += ['      <p class="insights-links">'
-              f'<a href="{PUBLICATION}/archive" target="_blank" rel="noopener">All articles on Substack</a>'
-              f'<a href="{PUBLICATION}/subscribe" target="_blank" rel="noopener">Subscribe</a></p>',
-              "    </section>",
+    lines += ["    </section>",
               "",
               "    " + END]
     return "\n".join(lines)
