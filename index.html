@@ -119,6 +119,17 @@ section.pad{padding-block:clamp(48px,6.4vw,86px)}
 .eng a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
 .eng-note{margin-top:18px;font-size:13.5px;color:var(--muted);max-width:60ch}
 
+/* ---- writing (list written by scripts/update_writing.py) ---- */
+.writing li{display:grid;grid-template-columns:auto 1fr;column-gap:0}
+.writing li .mark{margin-top:.6em}
+.writing .w-meta{grid-column:2;display:block;margin-top:3px;font-size:14px;color:var(--muted);
+  max-width:70ch}
+.writing-links{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:22px}
+.writing-links a{font-size:16px;text-decoration:none;border-bottom:2px solid var(--accent);
+  padding-bottom:2px;transition:color .16s ease}
+.writing-links a:hover{color:var(--accent)}
+.writing-links a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
 /* ---- speaking band: slow crossfade slideshow ---- */
 .band figure{margin:0;--dwell:7s}
 .show-frame{position:relative;overflow:hidden;height:clamp(220px,41vw,600px);
@@ -286,6 +297,9 @@ footer{background:var(--block-bg);color:var(--block-fg)}
       </ul>
       <p class="eng-note">Other clients are described without names as a matter of course. References are available on request.</p>
     </section>
+
+    <!-- writing:start -->
+    <!-- writing:end -->
 
     <hr class="rule">
 
