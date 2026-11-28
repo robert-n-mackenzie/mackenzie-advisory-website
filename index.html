@@ -61,7 +61,15 @@ h2{font-size:clamp(22px,2.4vw,28px);font-weight:600;letter-spacing:-.018em;
 p{margin:0}
 
 /* ---- header ---- */
-.top{padding-block:clamp(22px,3.2vw,34px)}
+.top{padding-block:clamp(22px,3.2vw,34px);display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:14px 28px}
+.nav{display:flex;flex-wrap:wrap;gap:8px 26px}
+.nav a{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.2em;
+  text-transform:uppercase;text-decoration:none;color:var(--muted);padding-block:6px;
+  transition:color .16s ease}
+.nav a:hover{color:var(--ink)}
+.nav a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+html{scroll-behavior:smooth}
 .logo{width:clamp(176px,17vw,212px);aspect-ratio:367.77/96;
   background:var(--logo-on-ground) center/contain no-repeat}
 
@@ -119,16 +127,28 @@ section.pad{padding-block:clamp(48px,6.4vw,86px)}
 .eng a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
 .eng-note{margin-top:18px;font-size:13.5px;color:var(--muted);max-width:60ch}
 
-/* ---- writing (list written by scripts/update_writing.py) ---- */
-.writing li{display:grid;grid-template-columns:auto 1fr;column-gap:0}
-.writing li .mark{margin-top:.6em}
-.writing .w-meta{grid-column:2;display:block;margin-top:3px;font-size:14px;color:var(--muted);
-  max-width:70ch}
-.writing-links{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:22px}
-.writing-links a{font-size:16px;text-decoration:none;border-bottom:2px solid var(--accent);
+/* ---- insights (list written by scripts/update_insights.py) ---- */
+.insights li{display:flex;align-items:baseline}
+.insights li .mark{flex:0 0 auto}
+.insights li>div{min-width:0}
+.insights .w-meta{display:block;margin-top:4px;font-size:14px;color:var(--muted);max-width:70ch}
+.insights .w-stats{display:block;margin-top:6px;font-family:var(--mono);font-size:11px;
+  letter-spacing:.05em;color:var(--muted)}
+.more{margin-top:0}
+.more>.insights{margin-top:0;border-top:0}
+.more summary{list-style:none;cursor:pointer;display:inline-block;margin-top:18px;
+  font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink);border-bottom:1px solid var(--accent);padding-bottom:3px}
+.more summary::-webkit-details-marker{display:none}
+.more summary:hover{color:var(--accent)}
+.more summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.more .when-open,.more[open] .when-closed{display:none}
+.more[open] .when-open{display:inline}
+.insights-links{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:28px}
+.insights-links a{font-size:16px;text-decoration:none;border-bottom:2px solid var(--accent);
   padding-bottom:2px;transition:color .16s ease}
-.writing-links a:hover{color:var(--accent)}
-.writing-links a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.insights-links a:hover{color:var(--accent)}
+.insights-links a:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
 
 /* ---- speaking band: slow crossfade slideshow ---- */
 .band figure{margin:0;--dwell:7s}
@@ -199,13 +219,24 @@ footer{background:var(--block-bg);color:var(--block-fg)}
   .foot-in{justify-content:flex-start}
   .foot-meta{text-align:left}
 }
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (max-width:520px){
+  .nav{gap:6px 18px}
+  .nav a{letter-spacing:.14em}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}}
 </style>
 
 </head>
 <body>
 <header class="wrap top">
   <div class="logo" role="img" aria-label="MacKenzie Executive Advisory"></div>
+  <nav class="nav" aria-label="Sections">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#insights">Insights</a>
+    <a href="#contact">Contact</a>
+  </nav>
 </header>
 
 <main>
@@ -226,7 +257,7 @@ footer{background:var(--block-bg);color:var(--block-fg)}
     </figure>
   </div>
 
-  <div class="block">
+  <div class="block" id="services">
     <div class="wrap block-in">
       <p class="label"><span class="mark"></span>What I do</p>
       <div class="svc">
@@ -251,7 +282,7 @@ footer{background:var(--block-bg);color:var(--block-fg)}
   </div>
 
   <div class="wrap">
-    <section class="pad">
+    <section class="pad" id="about">
       <p class="label"><span class="mark"></span>About</p>
       <div class="about">
         <img src="img/headshot.jpg" alt="Robert MacKenzie">
@@ -298,24 +329,34 @@ footer{background:var(--block-bg);color:var(--block-fg)}
       <p class="eng-note">Other clients are described without names as a matter of course. References are available on request.</p>
     </section>
 
-    <!-- writing:start -->
+    <!-- insights:start -->
     <hr class="rule">
 
-    <section class="pad" id="writing">
-      <p class="label"><span class="mark"></span>Writing</p>
-      <ul class="eng writing">
-        <li><span class="mark"></span><a href="https://robertnmackenzie.substack.com/p/product-leadership-robotics-framework-structural-robert-mackenzie-tglxe" target="_blank" rel="noopener">Product Leadership in Robotics: A Framework for Structural Commercialization (Learn over Earn)</a><span class="w-meta">14 April 2026 &middot; Build great tech.</span></li>
-        <li><span class="mark"></span><a href="https://robertnmackenzie.substack.com/p/healthily-challenging-leadership-setup-where-people-truly-mackenzie-figue" target="_blank" rel="noopener">Healthily Challenging: The Leadership Setup Where People Truly Thrive</a><span class="w-meta">17 March 2026 &middot; Leadership is too often framed as a choice between pushing hard for results or protecting well-being.</span></li>
-        <li><span class="mark"></span><a href="https://robertnmackenzie.substack.com/p/urnlishare7437460008071688192" target="_blank" rel="noopener">Should Switzerland embrace being the &quot;CERN of robotics&quot;?</a><span class="w-meta">11 March 2026 &middot; Should Switzerland embrace being the &quot;CERN of robotics&quot; and become a landscape of indispensability in robotics?</span></li>
+    <section class="pad" id="insights">
+      <p class="label"><span class="mark"></span>Insights</p>
+      <ul class="eng insights">
+        <li><span class="mark"></span><div><a href="https://robertnmackenzie.substack.com/p/product-leadership-robotics-framework-structural-robert-mackenzie-tglxe" target="_blank" rel="noopener">Product Leadership in Robotics: A Framework for Structural Commercialization (Learn over Earn)</a><span class="w-meta">14 April 2026 &middot; Build great tech.</span><span class="w-stats">3.4k impressions &middot; 31 reactions &middot; 12 comments on LinkedIn</span></div></li>
+        <li><span class="mark"></span><div><a href="https://robertnmackenzie.substack.com/p/healthily-challenging-leadership-setup-where-people-truly-mackenzie-figue" target="_blank" rel="noopener">Healthily Challenging: The Leadership Setup Where People Truly Thrive</a><span class="w-meta">17 March 2026 &middot; Leadership is too often framed as a choice between pushing hard for results or protecting well-being.</span><span class="w-stats">1.1k impressions &middot; 22 reactions &middot; 5 comments on LinkedIn</span></div></li>
+        <li><span class="mark"></span><div><a href="https://robertnmackenzie.substack.com/p/urnlishare7437460008071688192" target="_blank" rel="noopener">Should Switzerland embrace being the &quot;CERN of robotics&quot;?</a><span class="w-meta">11 March 2026 &middot; Should Switzerland embrace being the &quot;CERN of robotics&quot; and become a landscape of indispensability in robotics?</span><span class="w-stats">5.7k impressions &middot; 60 reactions &middot; 20 comments on LinkedIn</span></div></li>
       </ul>
-      <p class="writing-links"><a href="https://robertnmackenzie.substack.com/archive" target="_blank" rel="noopener">All articles</a><a href="https://robertnmackenzie.substack.com/subscribe" target="_blank" rel="noopener">Subscribe</a></p>
+      <details class="more">
+        <summary><span class="when-closed">Show all 8 articles</span><span class="when-open">Show fewer</span></summary>
+        <ul class="eng insights">
+        <li><span class="mark"></span><div><a href="https://robertnmackenzie.substack.com/p/hidden-magic-unplanned-capacity-push-teams-potential-limits-robert-weike" target="_blank" rel="noopener">The Hidden Magic of Unplanned Capacity: Push teams to their potential, not their limits</a><span class="w-meta">14 January 2026 &middot; Imagine walking into a top CEO’s office decades ago.</span><span class="w-stats">2.1k impressions &middot; 29 reactions &middot; 8 comments on LinkedIn</span></div></li>
+        <li><span class="mark"></span><div><a href="https://robertnmackenzie.substack.com/p/high-velocity-decision-making-individuals-teams-robert-mackenzie-1vobc" target="_blank" rel="noopener">High-Velocity Decision-Making for Individuals and Teams</a><span class="w-meta">27 August 2025 &middot; Most teams don’t suffer from a lack of decisions.</span><span class="w-stats">1.9k impressions &middot; 13 reactions &middot; 5 comments on LinkedIn</span></div></li>
+        <li><span class="mark"></span><div><a href="https://robertnmackenzie.substack.com/p/integrative-decision-making-bits-holacracy-any-robert-mackenzie-nqidf" target="_blank" rel="noopener">Integrative Decision-Making (Bits of Holacracy for Any Organization)</a><span class="w-meta">20 May 2025 &middot; In my years of leadership across various organizations, I&#x27;ve encountered numerous decision-making frameworks.</span><span class="w-stats">2.5k impressions &middot; 15 reactions &middot; 4 comments on LinkedIn</span></div></li>
+        <li><span class="mark"></span><div><a href="https://robertnmackenzie.substack.com/p/higher-engagement-tactical-meetings-bits-holacracy-any-mackenzie-wlabc" target="_blank" rel="noopener">Higher Engagement with Tactical Meetings (Bits of Holacracy for Any Organization)</a><span class="w-meta">14 April 2025 &middot; Tired of team meetings that drag on, achieve little, and leave people disengaged?</span><span class="w-stats">2.3k impressions &middot; 19 reactions &middot; 3 comments on LinkedIn</span></div></li>
+        <li><span class="mark"></span><div><a href="https://robertnmackenzie.substack.com/p/my-journey-beyond-numbers-humanity-leadership-robert-mackenzie-lgmvf" target="_blank" rel="noopener">My Journey Beyond Numbers to Humanity in Leadership</a><span class="w-meta">17 March 2025 &middot; In the middle of a mass layoff, I saw a way out that the spreadsheet couldn&#x27;t show me.</span><span class="w-stats">2.5k impressions &middot; 23 reactions &middot; 6 comments on LinkedIn</span></div></li>
+        </ul>
+      </details>
+      <p class="insights-links"><a href="https://robertnmackenzie.substack.com/archive" target="_blank" rel="noopener">All articles on Substack</a><a href="https://robertnmackenzie.substack.com/subscribe" target="_blank" rel="noopener">Subscribe</a></p>
     </section>
 
-    <!-- writing:end -->
+    <!-- insights:end -->
 
     <hr class="rule">
 
-    <section class="pad contact">
+    <section class="pad contact" id="contact">
       <div>
         <p class="label"><span class="mark"></span>Contact</p>
         <h2>Most engagements start with a conversation about decisions you are currently facing. Let&rsquo;s talk.</h2>

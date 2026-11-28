@@ -87,13 +87,16 @@ independent record sets.
 - Infomaniak invoices for the domain/mail live in the parent folder — business
   expense, hand to the Treuhänder with the year-end figures.
 
-## Writing section (Substack)
-The block between `<!-- writing:start -->` and `<!-- writing:end -->` in `index.html` is generated:
-`scripts/update_writing.py` reads https://robertnmackenzie.substack.com/feed and writes the three
-newest posts there. An unreachable or empty feed leaves the page unchanged. Run it by hand with
-`python3 scripts/update_writing.py`, then commit and push.
+## Insights section (Substack)
+Header menu (Services · About · Insights · Contact) jumps to the section ids on the page.
+The block between `<!-- insights:start -->` and `<!-- insights:end -->` in `index.html` is generated:
+`scripts/update_insights.py` reads https://robertnmackenzie.substack.com/feed, lists the three newest
+posts and puts the rest behind a "Show all" toggle (`<details>`, works without JavaScript). Under each
+article it shows LinkedIn figures from `data/engagement.json` (keyed by Substack slug; refreshed by hand
+from LinkedIn post analytics, last 28.11.2026). An unreachable or empty feed leaves the page unchanged.
+Run it by hand with `python3 scripts/update_insights.py`, then commit and push.
 
-`.github/workflows/writing.yml` (local, **not yet on GitHub**) runs the script daily at 06:00 UTC and
+`.github/workflows/insights.yml` (local, **not yet on GitHub**) runs the script daily at 06:00 UTC and
 commits only on change. The push token in `../.secrets/` has no "workflow" permission, so this file
 must be added through the GitHub web UI or after granting the token Workflows: read/write.
 
